@@ -1,0 +1,24 @@
+{
+  "ticket": "[TICKET]",
+  "requirements": [
+    {
+      "id": "R1",
+      "requirement": "Replace with one independently testable requirement",
+      "source": "Ticket Description — paragraph 1",
+      "status": "Stated"
+    }
+  ],
+  "decisions": [],
+  "assumptions": [],
+  "risks": [],
+  "gaps": [],
+  "coverage": [
+    {
+      "group": "G1",
+      "name": "Core workflow",
+      "traceabilityIds": ["R1"],
+      "automatedTests": [],
+      "state": "Not Started"
+    }
+  ]
+}

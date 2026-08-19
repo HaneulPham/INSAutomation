@@ -1,0 +1,12 @@
+{
+  "id": "8ad2af44-a2a3-47b6-bfb5-a07e55122e10",
+  "clientFileId": "6944114a-6ef8-4cda-9432-49ff22781294",
+  "type": "general",
+  "title": "Automation fixture task",
+  "status": "active",
+  "occurrenceIndex": 0,
+  "schedule": {
+    "dueAt": "2030-01-01T10:00:00.000Z",
+    "timezone": "Australia/Sydney"
+  }
+}
