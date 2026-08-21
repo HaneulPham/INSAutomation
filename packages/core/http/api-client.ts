@@ -8,6 +8,15 @@ import { logger } from '../logging/logger.js';
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
+export interface OutgoingRequest {
+  method: HttpMethod;
+  url: URL;
+}
+
+export type RequestHeaderProvider = (
+  request: OutgoingRequest
+) => Record<string, string> | Promise<Record<string, string>>;
+
 export interface RequestOptions {
   method?: HttpMethod;
   data?: unknown;
@@ -28,7 +37,8 @@ export class ApiClient {
     private readonly request: APIRequestContext,
     private readonly baseUrl: string,
     private readonly policy: ExecutionPolicy,
-    private readonly tokenProvider: TokenProvider
+    private readonly tokenProvider: TokenProvider,
+    private readonly requestHeaderProvider?: RequestHeaderProvider
   ) {}
 
   async send<T>(path: string, options: RequestOptions = {}): Promise<ApiResult<T>> {
@@ -38,15 +48,21 @@ export class ApiClient {
 
     const correlationId = newCorrelationId();
     const token = await this.tokenProvider.token();
+    const requestUrl = new URL(path, this.baseUrl);
+    const generatedHeaders = this.requestHeaderProvider
+      ? await this.requestHeaderProvider({ method, url: requestUrl })
+      : {};
     const headers: Record<string, string> = {
       accept: 'application/json',
       'x-correlation-id': correlationId,
-      ...options.headers
+      ...options.headers,
+      // Generated headers are authoritative and cannot be overridden by a test.
+      ...generatedHeaders
     };
     if (token) headers.authorization = `Bearer ${token}`;
 
     logger.info('api.request', { method, path, params: options.params }, correlationId);
-    const response = await this.request.fetch(new URL(path, this.baseUrl).toString(), {
+    const response = await this.request.fetch(requestUrl.toString(), {
       method,
       headers,
       ...(options.data === undefined ? {} : { data: options.data }),

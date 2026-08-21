@@ -7,3 +7,9 @@ export class EnvironmentTokenProvider implements TokenProvider {
     return process.env.INS_API_TOKEN || undefined;
   }
 }
+
+export class NoTokenProvider implements TokenProvider {
+  async token(): Promise<string | undefined> {
+    return undefined;
+  }
+}
