@@ -1,0 +1,12 @@
+{
+  "decisions": [
+    {
+      "id": "D1",
+      "source": "User confirmation — Option A",
+      "confirmedBehavior": "The password-token query and collection ClientId and ClientSecret headers use CP_CLIENT_ID and CP_CLIENT_SECRET.",
+      "coverageImpact": "The LifeGuardian client and password-token test use CP credentials consistently for both locations.",
+      "casesAffected": ["[TICKET]-G2-01"],
+      "status": "Active"
+    }
+  ]
+}

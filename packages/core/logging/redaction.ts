@@ -1,4 +1,5 @@
-const SENSITIVE_KEY = /authorization|token|password|secret|phone|email|medical|address/i;
+const SENSITIVE_KEY =
+  /authorization|token|password|pwd|secret|phone|mobile|email|medical|address|imei|deviceId|api[-_]?key|hash|salt|sip|recovery/i;
 
 export function redact(value: unknown): unknown {
   if (Array.isArray(value)) {
