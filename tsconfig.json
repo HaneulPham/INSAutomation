@@ -11,15 +11,14 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "types": ["node", "@playwright/test"],
-    "baseUrl": ".",
     "paths": {
-      "@config/*": ["config/*"],
-      "@core/*": ["packages/core/*"],
-      "@domain/*": ["packages/domain/*"],
-      "@api/*": ["packages/api/*"],
-      "@ui/*": ["packages/ui/*"],
-      "@factories/*": ["factories/*"],
-      "@schemas/*": ["schemas/*"]
+      "@config/*": ["./config/*"],
+      "@core/*": ["./packages/core/*"],
+      "@domain/*": ["./packages/domain/*"],
+      "@api/*": ["./packages/api/*"],
+      "@ui/*": ["./packages/ui/*"],
+      "@factories/*": ["./factories/*"],
+      "@schemas/*": ["./schemas/*"]
     }
   },
   "include": [
