@@ -19,13 +19,14 @@ export default defineConfig({
     ['junit', { outputFile: './output/reports/junit.xml' }]
   ],
   use: {
-    baseURL: environment.platforms.cpWeb.baseUrl,
+    baseURL: environment.platforms.api.baseUrl,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     actionTimeout: 15_000,
     navigationTimeout: 30_000,
     extraHTTPHeaders: {
+      'Content-Type': 'application/json',
       'x-automation-environment': environment.name
     }
   },
